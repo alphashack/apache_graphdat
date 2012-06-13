@@ -1,0 +1,3 @@
+[submodule "lib/module_graphdat"]
+	path = lib/module_graphdat
+	url = git@github.com:alphashack/module_graphdat.git
