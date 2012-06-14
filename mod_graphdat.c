@@ -6,7 +6,7 @@
 #include "lib/module_graphdat/graphdat.h"
 
 #ifndef MOD_GRAPHDAT_DEFAULT_SOCKET_FILE
-#define MOD_GRAPHDAT_DEFAULT_SOCKET_FILE "/tmp/gd.agent.sock_not"
+#define MOD_GRAPHDAT_DEFAULT_SOCKET_FILE "/tmp/gd.agent.sock"
 #endif
 
 #ifndef MOD_GRAPHDAT_SOURCE
