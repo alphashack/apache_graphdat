@@ -40,7 +40,7 @@ static const char * set_mod_graphdat_socket(cmd_parms *parms, void *config, cons
 	return NULL;
 }
 
-void delegate_logger(void * user, const char * fmt, ...)
+void delegate_logger(graphdat_log_t type, void * user, const char * fmt, ...)
 {
 	va_list argp;
 	va_start(argp, fmt);
