@@ -88,7 +88,7 @@ static int mod_graphdat_log_transaction_handler(request_rec *r)
 		int diff_usec = now_usec - start_usec;
 		double diff_msec = (double)diff_usec / 1000;
 
-		graphdat_store((char *)r->method, strlen(r->method), r->uri, strlen(r->uri), diff_msec, delegate_logger, NULL, 0);
+		graphdat_store((char *)r->method, strlen(r->method), r->uri, strlen(r->uri), r->hostname, strlen(r->hostname), diff_msec, delegate_logger, NULL, 0);
 
 		return OK;
 	 }
