@@ -12,5 +12,5 @@ then
   BUILDWITH="apxs"
 fi
 
-sudo $BUILDWITH -c -i -a -n graphdat -I lib/module_graphdat/os -I lib/module_graphdat/os/linux lib/module_graphdat/list.c lib/module_graphdat/os/linux/mutex.c lib/module_graphdat/os/linux/thread.c lib/module_graphdat/os/linux/socket.c lib/module_graphdat/msgpack/src/objectc.c lib/module_graphdat/msgpack/src/unpack.c lib/module_graphdat/msgpack/src/version.c lib/module_graphdat/msgpack/src/vrefbuffer.c lib/module_graphdat/msgpack/src/zone.c lib/module_graphdat/graphdat.c mod_graphdat.c
+sudo $BUILDWITH -c -i -a -n graphdat -I lib/module_graphdat/os -l rt -I lib/module_graphdat/os/linux lib/module_graphdat/list.c lib/module_graphdat/os/linux/timehelper.c lib/module_graphdat/os/linux/mutex.c lib/module_graphdat/os/linux/thread.c lib/module_graphdat/os/linux/socket.c lib/module_graphdat/msgpack/src/objectc.c lib/module_graphdat/msgpack/src/unpack.c lib/module_graphdat/msgpack/src/version.c lib/module_graphdat/msgpack/src/vrefbuffer.c lib/module_graphdat/msgpack/src/zone.c lib/module_graphdat/graphdat.c mod_graphdat.c
 
