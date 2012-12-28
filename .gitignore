@@ -43,3 +43,4 @@ UpgradeLog.XML
 *.slo
 *.la
 .libs/
+*~
