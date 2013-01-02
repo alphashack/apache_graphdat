@@ -2,6 +2,7 @@
 
 #include "httpd.h"
 #include "http_config.h"
+#include "http_log.h"
 
 #include "lib/module_graphdat/graphdat.h"
 
@@ -14,6 +15,8 @@
 #endif
 
 static bool s_enabled = false;
+
+extern server_rec* ap_server_conf;
 
 module AP_MODULE_DECLARE_DATA graphdat_module;
 
@@ -45,9 +48,25 @@ void delegate_logger(graphdat_log_t type, void * user, const char * fmt, ...)
 	va_list argp;
 	va_start(argp, fmt);
 
-	vfprintf(stderr, fmt, argp);
-	fprintf(stderr, "\n");
-	fflush(stderr);
+	int level;
+	switch(type)
+	{
+	case ERROR_MESSAGE:
+		level = APLOG_ERR;
+		break;
+	case WARNING_MESSAGE:
+		level = APLOG_WARNING;
+		break;
+	default:
+		level = APLOG_INFO;
+	}
+
+	char *msg;
+	if(vasprintf(&msg, fmt, argp) > 0)
+	{
+		ap_log_error(APLOG_MARK, level, 0, ap_server_conf, "%s", msg);
+		free(msg);
+	}
 
 	va_end(argp);
 }
@@ -88,7 +107,7 @@ static int mod_graphdat_log_transaction_handler(request_rec *r)
 		int diff_usec = now_usec - start_usec;
 		double diff_msec = (double)diff_usec / 1000;
 
-		graphdat_store((char *)r->method, strlen(r->method), r->uri, strlen(r->uri), r->hostname, strlen(r->hostname), diff_msec, delegate_logger, NULL, 0);
+		graphdat_store((char *)r->method, strlen(r->method), r->uri, strlen(r->uri), (char *)r->hostname, strlen(r->hostname), diff_msec, delegate_logger, NULL, 0);
 
 		return OK;
 	 }
