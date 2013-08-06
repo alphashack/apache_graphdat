@@ -9,21 +9,18 @@ if [ -f "/etc/debian_version" ];
 then
   type apxs2 >/dev/null 2>&1 || { echo >&2 "The apache dev tools are not installed.  Please run 'sudo apt-get install apache2-dev' and then try again."; exit 1; }
   BUILDWITH="apxs2"
-elif [ -f "/etc/redhat-release" ];
+elif [ -f "/etc/redhat-release" || -f "/etc/system-release" ];
 then
   type apxs >/dev/null 2>&1 || { echo >&2 "The apache dev tools are not installed.  Please run 'sudo yum install httpd-dev' and then try again."; exit 1; }
   BUILDWITH="apxs"
-# and this for osx
+elif [[ `uname` == "Darwin" ]]; then
+  SYSTEM="osx"
+  BUILDWITH="apxs"
+  CLOCK_INCLUDE=""
 else
-    if [[ `uname` == "Darwin" ]]; then
-        SYSTEM="osx"
-        BUILDWITH="apxs"
-        CLOCK_INCLUDE=""
-    else
-        SYSTEM="unknown"
-        echo "unknown operating system: sorry we only support linux and osx right now" >&2
-        exit
-    fi
+  SYSTEM="unknown"
+  echo "unknown operating system: sorry we only support linux and osx right now" >&2
+  exit
 fi
 
 sudo $BUILDWITH -c -i -a -n graphdat \
