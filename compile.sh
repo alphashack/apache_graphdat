@@ -9,9 +9,9 @@ if [ -f "/etc/debian_version" ];
 then
   type apxs2 >/dev/null 2>&1 || { echo >&2 "The apache dev tools are not installed.  Please run 'sudo apt-get install apache2-dev' and then try again."; exit 1; }
   BUILDWITH="apxs2"
-elif [ -f "/etc/redhat-release" || -f "/etc/system-release" ];
+elif [[ -f "/etc/redhat-release" || -f "/etc/system-release" ]];
 then
-  type apxs >/dev/null 2>&1 || { echo >&2 "The apache dev tools are not installed.  Please run 'sudo yum install httpd-dev' and then try again."; exit 1; }
+  type apxs >/dev/null 2>&1 || { echo >&2 "The apache dev tools are not installed.  Please run 'sudo yum install httpd-dev' or  'sudo yum install httpd-devel' and then try again."; exit 1; }
   BUILDWITH="apxs"
 elif [[ `uname` == "Darwin" ]]; then
   SYSTEM="osx"
