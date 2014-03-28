@@ -1,5 +1,8 @@
-apache_graphdat
-===============
+# Graphdat Apache Module
+
+*Apache Extension for Graphdat*
+
+--
 
 apache module for sending request measures to graphdat agent
 
