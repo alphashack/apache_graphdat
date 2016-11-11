@@ -2,6 +2,8 @@
 
 *Apache Extension for Graphdat*
 
+## DEPRECATED - This is now longer in use or supported.
+
 --
 
 apache module for sending request measures to graphdat agent
